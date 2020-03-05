@@ -1,0 +1,64 @@
+[System]
+Name='correct'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=12
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='direction'
+Range=[-100 100]
+NumMFs=2
+MF1='right':'smf',[-5 5]
+MF2='left':'zmf',[-5 5]
+
+[Input2]
+Name='APF'
+Range=[-20 450]
+NumMFs=5
+MF1='ZERO':'trimf',[-15 0 15]
+MF2='SMALL':'trimf',[0 30 60]
+MF3='MED':'trimf',[30 60 90]
+MF4='MEDBIG':'trimf',[60 90 120]
+MF5='big':'trapmf',[90 120 450 450]
+
+[Input3]
+Name='error'
+Range=[-20 600]
+NumMFs=2
+MF1='zero':'trimf',[-20 0 20]
+MF2='big':'trapmf',[0 50 600 600]
+
+[Output1]
+Name='correction'
+Range=[-2.5 2.5]
+NumMFs=9
+MF1='zero':'trimf',[-0.1 0 0.1]
+MF2='sp':'trimf',[0 0.25 0.5]
+MF3='mp':'trimf',[0.25 0.5 0.75]
+MF4='mbp':'trimf',[0.5 0.75 1]
+MF5='bp':'trimf',[0.75 1 1.25]
+MF6='sn':'trimf',[-0.5 -0.25 0]
+MF7='mn':'trimf',[-0.75 -0.5 -0.25]
+MF8='mbn':'trimf',[-1 -0.75 -0.5]
+MF9='bn':'trimf',[-1.25 -1 -0.75]
+
+[Rules]
+2 2 0, 6 (1) : 1
+2 3 0, 7 (1) : 1
+2 4 0, 8 (1) : 1
+2 5 0, 9 (1) : 1
+2 1 0, 1 (1) : 1
+1 2 0, 2 (1) : 1
+1 3 0, 3 (1) : 1
+1 4 0, 4 (1) : 1
+1 5 0, 5 (1) : 1
+1 1 0, 1 (1) : 1
+2 0 1, 1 (1) : 1
+1 0 1, 1 (1) : 1
